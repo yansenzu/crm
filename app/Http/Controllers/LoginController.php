@@ -10,20 +10,16 @@ class LoginController extends Controller
 {
     public function login(Request $request){
         $this->validate($request, [
-            'email'    => 'email',
+            'hondaid'    => 'required',
             'password' => 'required'
         ]);
 
-        $email= $request->email;
+        $hondaid= $request->hondaid;
         $password = $request->password;
-        // $rand = str_random(40);
         $rand = Str::random(40);
         $api_token = base64_encode($rand);
-        // $test = base64_decode($api_token);
-        // return $test;
-
-        if(!$email || !$password) return $this->responseError(NULL,  'Emai lu kosong tong!');
-        $user = AdminAPI::where('email', $email)->first();
+        if(!$hondaid || !$password) return $this->responseError(NULL,  'Honda ID tidak boleh kosong!');
+        $user = AdminAPI::where('hondaid', $hondaid)->first();
         if(!$user) return $this->responseError($user, 'Akun tidak ditemukan!', 404);
 
         $gen_api = $user->update([

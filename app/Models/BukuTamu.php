@@ -5,12 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AdminAPI extends Model
+class BukuTamu extends Model
 {
     use HasFactory;
-
-    protected $primaryKey = 'hondaid';
-    protected $table = 'users';
-    protected $guarded = '';
-    
+    protected $table = 'buku_tamu';
+    protected $fillable = ['gambar', 'keterangan'];
 }

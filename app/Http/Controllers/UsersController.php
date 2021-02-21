@@ -5,11 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AdminAPI;
 use App\Models\User;
-use Illuminate\Support\Str;
 
-class RegisterController extends Controller
+
+class UsersController extends Controller
 {
-    public function register(Request $request){
+    public function index(){
+        $users = User::all();
+        return $users;
+    }
+
+    public function usersbyid(request $request, $id){
+        return User::find($id);
+    }
+
+    public function updateuser(request $request, $id){
         $this->validate($request, [
             'hondaid'     => 'required',
             'namapic'    => 'required',
@@ -21,18 +30,18 @@ class RegisterController extends Controller
             'dealer' => 'required',
             'class' => 'required',
         ]);
-            $hondaid = $request->hondaid;
-            $namapic= $request->namapic;
-            $password = $request->password;
-            $tempatlahir = $request->tempatlahir;
-            $tgllahir = $request->tgllahir;
-            $jabatan = $request->jabatan;
-            $status = $request->status;
-            $dealer = $request->dealer;
-            $class = $request->class;
-            
 
-        $Adminauth = User::create([
+        $hondaid = $request->hondaid;
+        $namapic= $request->namapic;
+        $password = $request->password;
+        $tempatlahir = $request->tempatlahir;
+        $tgllahir = $request->tgllahir;
+        $jabatan = $request->jabatan;
+        $status = $request->status;
+        $dealer = $request->dealer;
+        $class = $request->class;
+
+        $update = User::update([
             'hondaid'     => $request->hondaid,
             'namapic'    => $request->namapic,
             'password' => $request->password,
@@ -59,4 +68,6 @@ class RegisterController extends Controller
             }
             return(['error' => 'Gagal daftar !']);
     }
+
+    
 }

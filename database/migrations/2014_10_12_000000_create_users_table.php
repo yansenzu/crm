@@ -23,6 +23,10 @@ class CreateUsersTable extends Migration
             $table->string('status');
             $table->string('dealer');
             $table->string('class');
+            $table->text('remember_token')->nullable();
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('created_at')->nullable();
+
 
         });
     }
