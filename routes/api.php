@@ -28,3 +28,4 @@ Route::get('/v1/users/{id}', [UsersController::class, 'usersbyid']);
 Route::post('/v1/users/register', [RegisterController::class, 'register']);
 Route::post('/v1/users/login', [LoginController::class, 'login']);
 Route::post('/v1/users/uploadbukutamu', [BukuTamuController::class, 'upload_bukutamu']);
+Route::post('/v1/users/deleteuser/{hondaid}', [UsersController::class, 'deleteuser']);

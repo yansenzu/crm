@@ -14,11 +14,11 @@ class UsersController extends Controller
         return $users;
     }
 
-    public function usersbyid(request $request, $id){
-        return User::find($id);
+    public function usersbyid(request $request, $hondaid){
+        return User::find($hondaid);
     }
 
-    public function updateuser(request $request, $id){
+    public function updateuser(request $request, $hondaid){
         $this->validate($request, [
             'hondaid'     => 'required',
             'namapic'    => 'required',
@@ -69,5 +69,30 @@ class UsersController extends Controller
             return(['error' => 'Gagal daftar !']);
     }
 
-    
+    public function deleteuser(request $request, $hondaid){
+        $idsession = $request->idsession;
+        $role1 = User::select('role')->where('hondaid', $idsession)->get();
+        $role2 = User::select('role')->where('hondaid', $hondaid)->get();
+        return $role2;
+        if($role != 'super admin'){
+            $user = User::find($hondaid);
+            $user->delete();
+            return response()->json([
+                'status' => 'succes',
+                'message' => 'Berhasil Hapus Akun !'
+            ], 200);
+        }
+        else if($role == 'admin'){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Tidak bisa hapus'
+            ], 200);
+        }
+        else{
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Level anda bukan super admin'
+            ], 200);
+        }
+    }
 }

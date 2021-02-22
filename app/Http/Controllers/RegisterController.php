@@ -12,16 +12,19 @@ class RegisterController extends Controller
     public function register(Request $request){
         $this->validate($request, [
             'hondaid'     => 'required',
+            'role'  => 'required',
             'namapic'    => 'required',
             'password' => 'required',
             'tempatlahir' => 'required',
             'tgllahir' => 'required',
+            // 'foto' => 'required',
             'jabatan' => 'required',
             'status' => 'required',
             'dealer' => 'required',
-            'class' => 'required',
+            // 'level' => 'required',
         ]);
             $hondaid = $request->hondaid;
+            $role = $request->role;
             $namapic= $request->namapic;
             $password = $request->password;
             $tempatlahir = $request->tempatlahir;
@@ -29,11 +32,12 @@ class RegisterController extends Controller
             $jabatan = $request->jabatan;
             $status = $request->status;
             $dealer = $request->dealer;
-            $class = $request->class;
+            // $level = $request->class;
             
 
         $Adminauth = User::create([
             'hondaid'     => $request->hondaid,
+            'role' => $request->role,
             'namapic'    => $request->namapic,
             'password' => $request->password,
             'tempatlahir' => $request->tempatlahir,
@@ -41,11 +45,14 @@ class RegisterController extends Controller
             'jabatan' => $request->jabatan,
             'status' => $request->status,
             'dealer' => $request->dealer,
-            'class' => $request->class
+            'level' => 'basic',
+            'point' => 0
+
         ]);
             if($Adminauth){
                 return ([
                     'hondaid'     => $hondaid,
+                    'role'  => $role,
                     'namapic'    => $namapic,
                     'password' => $password,
                     'tempatlahir' => $tempatlahir,
@@ -53,7 +60,8 @@ class RegisterController extends Controller
                     'jabatan' => $jabatan,
                     'status' => $status,
                     'dealer' => $dealer,
-                    'class' => $class,
+                    'level' => 'basic',
+                    'point' => 0
 
                 ]);
             }
