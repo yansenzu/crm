@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
     public function getprofile(Request $request){
 
         $response = explode(' ', $request->header('Authorization'));
-        $token = User::where('remember_token', $response[1])->first();
+        $profile = User::where('remember_token', $response[1])->first();
 
         if($profile){
             return response()->json([
@@ -22,5 +22,5 @@ class ProfileController extends Controller
             'status' => 'error',
             'profile' => $profile
         ], 200);
-    }
+}
 }

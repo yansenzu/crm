@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
 /*
@@ -28,3 +28,6 @@ Route::post('/v1/admin/adduser', [AdminController::class, 'adduser']);
 Route::post('/v1/admin/edituser/{hondaid}', [AdminController::class, 'edituser']);
 Route::post('v1/admin/deleteuser/{hondaid}', [AdminController::class, 'deleteuser']);
 Route::post('/v1/admin/loginadmin', [AdminController::class, 'loginadmin']);
+
+//Route User
+Route::get('/v1/users/userprofile', [UserController::class, 'getprofile']);
