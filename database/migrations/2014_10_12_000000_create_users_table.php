@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('namapic');
             $table->string('password');
             $table->string('tempatlahir');
-            $table->date('tgllahir');
+            $table->string('tgllahir');
             $table->string('foto')->nullable();
             $table->string('jabatan');
             $table->string('status');
