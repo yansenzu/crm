@@ -31,3 +31,5 @@ Route::post('/v1/admin/loginadmin', [AdminController::class, 'loginadmin']);
 
 //Route User
 Route::get('/v1/users/userprofile', [UserController::class, 'getprofile']);
+Route::put('/v1/users/edituserprofile', [UserController::class, 'edituserprofile']);
+Route::post('/v1/users/uploadimmage', [UserController::class, 'uploadimmage']);
