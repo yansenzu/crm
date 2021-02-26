@@ -82,7 +82,6 @@ class AdminController extends Controller
 
     public function edituser(request $request, $hondaid){
         $namapic= $request->namapic;
-        $password = $request->password;
         $tempatlahir = $request->tempatlahir;
         $tgllahir = $request->tgllahir;
         $jabatan = $request->jabatan;
@@ -93,7 +92,6 @@ class AdminController extends Controller
 
         $update = AdminAPI::find($hondaid);
         $update->namapic = $namapic;
-        $update->password = $password;
         $update->tempatlahir = $tempatlahir;
         $update->jabatan = $jabatan;
         $update->status = $status;
