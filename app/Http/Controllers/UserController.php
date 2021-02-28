@@ -50,13 +50,13 @@ class UserController extends Controller
         if($update){
             return response()->json([
                 'status'  => 'succes',
-                'message' => 'Success to update profile !',
+                'message' => 'Success to update password !',
                 'profile' => $profile
             ]);
         }
         return response()->json([
             'status'  => 'error',
-            'message' => 'Failed to update profile !',
+            'message' => 'Failed to update password !',
             'profile' => $profile
         ]);
     }
@@ -65,11 +65,7 @@ class UserController extends Controller
         $response = explode(' ', $request->header('Authorization'));
         $profile = User::where('remember_token', $response[1])->first();
 
-        $this->validate($request, [
-			'foto' => 'required|file|image|mimes:jpeg,png,jpg'
-		]);
-
-        $foto = $request->file('foto');
+             $foto = $request->file('foto');
         $nama_foto = time()."_".$foto->getClientOriginalName();
         $path = 'profile';
 		$foto->move($path,$nama_foto);
