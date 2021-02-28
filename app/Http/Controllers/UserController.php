@@ -88,4 +88,5 @@ class UserController extends Controller
             'message' => 'Failed to upload immage',
         ]);
     }
+
 }
