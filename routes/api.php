@@ -37,6 +37,6 @@ Route::prefix('v1/admin')->group(function () {
 Route::prefix('v1/users')->group(function () {
     Route::get('profile', [UserController::class, 'getprofile']);
     Route::put('profile', [UserController::class, 'edituserprofile']);
-    Route::post('uploadimmage', [UserController::class, 'uploadimmage']);
+    Route::post('uploadimmage/{hondaid}', [UserController::class, 'uploadimmage']);
     Route::put('updateuserpassword', [PasswordController::class, 'updateuserpassword']);
 });

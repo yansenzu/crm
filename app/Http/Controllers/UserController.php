@@ -61,11 +61,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function uploadimmage(Request $request){
-        $response = explode(' ', $request->header('Authorization'));
-        $profile = User::where('remember_token', $response[1])->first();
+    public function uploadimmage(request $request, $hondaid){
+        // $response = explode(' ', $request->header('Authorization'));
+        // $profile = User::where('remember_token', $response[1])->first();
 
-             $foto = $request->file('foto');
+        $profile = User::where('hondaid', $hondaid)->first();
+        $foto = $request->file('foto');
         $nama_foto = time()."_".$foto->getClientOriginalName();
         $path = 'profile';
 		$foto->move($path,$nama_foto);
