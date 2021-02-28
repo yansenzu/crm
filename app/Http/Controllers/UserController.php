@@ -33,7 +33,6 @@ class UserController extends Controller
 
         $this->validate($request, [
             'namapic'    => 'required',
-            'password' => 'required',
             'tempatlahir' => 'required',
             'tgllahir' => 'required',
             'jabatan' => 'required',
@@ -42,7 +41,6 @@ class UserController extends Controller
 
         $update = $profile->update([
             'namapic' => $request->namapic,
-            'password' => $request->password,
             'tempatlahir' => $request->tempatlahir,
             'tgllahir' => $request->tgllahir,
             'jabatan' => $request->jabatan,
