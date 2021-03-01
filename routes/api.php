@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\VideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,5 @@ Route::prefix('v1/users')->group(function () {
     Route::put('profile', [UserController::class, 'edituserprofile']);
     Route::post('uploadimmage/{hondaid}', [UserController::class, 'uploadimmage']);
     Route::put('updateuserpassword', [PasswordController::class, 'updateuserpassword']);
+    Route::post('video', [VideoController::class, 'insertvideo']);
 });

@@ -13,7 +13,14 @@ class Video extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('videos', function (Blueprint $table){
+            $table->id();
+            $table->longtext('videourl');
+            $table->longtext('description');
+            $table->longtext('title');
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('created_at')->nullable();
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ class Video extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('videos');
     }
 }
