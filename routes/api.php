@@ -39,6 +39,10 @@ Route::prefix('v1/users')->group(function () {
     Route::get('profile', [UserController::class, 'getprofile']);
     Route::put('profile', [UserController::class, 'edituserprofile']);
     Route::post('uploadimmage/{hondaid}', [UserController::class, 'uploadimmage']);
+    Route::post('changeavatar', [UserController::class, 'changeAvatar'])->middleware('authorization');
     Route::put('updateuserpassword', [PasswordController::class, 'updateuserpassword']);
     Route::post('video', [VideoController::class, 'insertvideo']);
 });
+
+// Route::middleware(['authorization'])->group(function () {
+// });

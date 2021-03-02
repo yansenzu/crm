@@ -20,6 +20,20 @@ class User extends Authenticatable
     protected $table = 'users';
     protected $guarded = '';
 
+    protected $fillable = [
+        'hondaid',
+        'namapic',
+        'role',
+        'tempatlahir',
+        'tgllahir',
+        'foto',
+        'jabatan',
+        'status',
+        'dealer',
+        'level',
+        'point',
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -27,7 +41,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        
+        'remember_token'
     ];
 
     /**
