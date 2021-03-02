@@ -26,23 +26,40 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 //Route Admin
-Route::prefix('v1/admin')->group(function () {
-    Route::post('user', [AdminController::class, 'adduser']);
-    Route::put('user/{hondaid}', [AdminController::class, 'edituser']);
-    Route::post('user/{hondaid}', [AdminController::class, 'deleteuser']);
-    Route::post('loginadmin', [AdminController::class, 'loginadmin']);
-    Route::put('updatepassword/{hondaid}', [PasswordController::class, 'updatepassword']);
-});
+// Route::prefix('v1/admin')->group(function () {
+//     Route::post('user', [AdminController::class, 'adduser']);
+//     Route::put('user/{hondaid}', [AdminController::class, 'edituser']);
+//     Route::post('user/{hondaid}', [AdminController::class, 'deleteuser']);
+//     Route::post('loginadmin', [AdminController::class, 'loginadmin']);
+//     Route::put('updatepassword/{hondaid}', [PasswordController::class, 'updatepassword']);
+// });
 
 //Route User
-Route::prefix('v1/users')->group(function () {
-    Route::get('profile', [UserController::class, 'getprofile']);
-    Route::put('profile', [UserController::class, 'edituserprofile']);
-    Route::post('uploadimmage/{hondaid}', [UserController::class, 'uploadimmage']);
-    Route::post('changeavatar', [UserController::class, 'changeAvatar'])->middleware('authorization');
-    Route::put('updateuserpassword', [PasswordController::class, 'updateuserpassword']);
-    Route::post('video', [VideoController::class, 'insertvideo']);
-});
-
-// Route::middleware(['authorization'])->group(function () {
+// Route::prefix('v1/users')->group(function () {
+    // Route::get('profile', [UserController::class, 'getprofile']);
+    // Route::put('profile', [UserController::class, 'edituserprofile']);
+    // Route::post('uploadimmage/{hondaid}', [UserController::class, 'uploadimmage']);
+    // Route::post('changeavatar', [UserController::class, 'changeAvatar'])->middleware('authorization');
+    // Route::put('updateuserpassword', [PasswordController::class, 'updateuserpassword']);
+    // Route::post('video', [VideoController::class, 'insertvideo']);
 // });
+
+Route::group(['prefix' => 'v1'], function () {
+    //Admin
+    Route::post('admin/login', [AdminController::class, 'loginadmin']);
+    Route::group(['prefix' => 'admin', 'middleware' => 'authorization'], function() {
+        Route::post('user', [AdminController::class, 'adduser']);
+        Route::put('user/{hondaid}', [AdminController::class, 'edituser']);
+        Route::post('user/{hondaid}', [AdminController::class, 'deleteuser']);
+        Route::put('updatepassword/{hondaid}', [PasswordController::class, 'updatepassword']);
+    });
+    //Users
+    Route::group(['prefix' => 'users', 'middleware' => 'authorization'], function() {
+        Route::post('changeavatar', [UserController::class, 'changeAvatar']);
+        Route::get('profile', [UserController::class, 'getprofile']);
+        Route::put('profile', [UserController::class, 'edituserprofile']);
+        Route::post('changeavatar', [UserController::class, 'changeAvatar']);
+        Route::put('updateuserpassword', [PasswordController::class, 'updateuserpassword']);
+        Route::post('video', [VideoController::class, 'insertvideo']);
+    });
+});
