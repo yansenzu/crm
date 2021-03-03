@@ -55,7 +55,6 @@ Route::group(['prefix' => 'v1'], function () {
     });
     //Users
     Route::group(['prefix' => 'users', 'middleware' => 'authorization'], function() {
-        Route::post('changeavatar', [UserController::class, 'changeAvatar']);
         Route::get('profile', [UserController::class, 'getprofile']);
         Route::put('profile', [UserController::class, 'edituserprofile']);
         Route::post('changeavatar', [UserController::class, 'changeAvatar']);
