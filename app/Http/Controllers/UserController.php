@@ -7,7 +7,8 @@ use Illuminate\support\Str;
 use App\Models\User;
 use Carbon\Carbon;
 use Image;
-use File;
+// use File;
+use illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
