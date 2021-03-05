@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\PointController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,5 +61,6 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('changeavatar', [UserController::class, 'changeAvatar']);
         Route::put('updateuserpassword', [PasswordController::class, 'updateuserpassword']);
         Route::post('video', [VideoController::class, 'insertvideo']);
+        Route::get('point', [PointController::class, 'showpoint']);
     });
 });

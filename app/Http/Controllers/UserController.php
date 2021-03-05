@@ -26,7 +26,7 @@ class UserController extends Controller
         return response()->json([
             'status' => 'error',
             'profile' => $profile
-        ], 200);
+        ], 400);
     }
 
     public function edituserprofile(Request $request){
@@ -137,7 +137,5 @@ class UserController extends Controller
 
         return $this->responseSuccess($user, 'Upload Successfully!');        
     }
-
-
 
 }
