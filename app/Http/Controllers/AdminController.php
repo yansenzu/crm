@@ -15,11 +15,12 @@ class AdminController extends Controller
         ]);
         $hondaid= $request->hondaid;
         $password = $request->password;
+        $passwords = hash('sha256', $password);
 
         $token = Str::random(60);
         $api_token = hash('sha256', $token);
         
-        $admin = AdminAPI::where([['hondaid', '=', $hondaid], ['password', '=', $password]])->first();
+        $admin = AdminAPI::where([['hondaid', '=', $hondaid], ['password', '=', $passwords]])->first();
         
         if(!$admin)
             return response()->json([
@@ -53,7 +54,7 @@ class AdminController extends Controller
             $hondaid = $request->hondaid;
             $role = $request->role;
             $namapic= $request->namapic;
-            $password = $request->password;
+            $password = hash('sha256',$request->password);
             $tempatlahir = $request->tempatlahir;
             $tgllahir = $request->tgllahir;
             $jabatan = $request->jabatan;
@@ -75,7 +76,19 @@ class AdminController extends Controller
 
         ]);
             if($Adminauth){
-               return AdminAPI::where('hondaid', $hondaid)->first();
+            //    return AdminAPI::where('hondaid', $hondaid)->first();
+            return response()-json([
+            'hondaid'     => $request->hondaid,
+            'role'        => $request->role,
+            'namapic'     => $request->namapic,
+            'tempatlahir' => $request->tempatlahir,
+            'tgllahir'    => $request->tgllahir,
+            'jabatan'     => $request->jabatan,
+            'status'      => $request->status,
+            'dealer'      => $request->dealer,
+            'level'       => 'basic',
+            'point'       => 0
+            ]);
             }
             return(['error' => 'Gagal tambah akun !']);
     }

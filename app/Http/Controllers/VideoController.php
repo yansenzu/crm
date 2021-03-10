@@ -45,4 +45,24 @@ class VideoController extends Controller
         ]);
         
     }
+
+    public function videobytype(Request $request){
+        $response = explode(' ', $request->header('Authorization'));
+        $profile = User::where('remember_token', $response[1])->first();
+        $type = $profile->level;
+
+        $video = Video::where('level', $type)->first();
+
+        if($video){
+            return response()->json([
+                'status'    => 'success',
+                'video'     => $video
+            ]);
+        }
+        return response()->json([
+            'status'    => 'error',
+            'video'     => 'null'
+        ]);
+
+    }
 }

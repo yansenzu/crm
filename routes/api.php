@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\PointController;
+use App\Http\Controllers\SoalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['prefix' => 'v1'], function () {
+    //Admin
+    Route::post('admin/login', [AdminController::class, 'loginadmin']);
+    Route::group(['prefix' => 'admin', 'middleware' => 'authorization'], function() {
+        Route::post('user', [AdminController::class, 'adduser']);
+        Route::put('user/{hondaid}', [AdminController::class, 'edituser']);
+        Route::post('user/{hondaid}', [AdminController::class, 'deleteuser']);
+        Route::put('updatepassword/{hondaid}', [PasswordController::class, 'updatepassword']);
+        Route::post('soal', [SoalController::class, 'postsoal']);
+    });
+    //Users
+    Route::group(['prefix' => 'users', 'middleware' => 'authorization'], function() {
+        Route::get('profile', [UserController::class, 'getprofile']);
+        Route::put('profile', [UserController::class, 'edituserprofile']);
+        Route::post('changeavatar', [UserController::class, 'changeAvatar']);
+        Route::put('updateuserpassword', [PasswordController::class, 'updateuserpassword']);
+        Route::post('video', [VideoController::class, 'insertvideo']);
+        Route::get('point', [PointController::class, 'showpoint']);
+    });
+});
 
 //Route Admin
 // Route::prefix('v1/admin')->group(function () {
@@ -44,23 +65,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     // Route::put('updateuserpassword', [PasswordController::class, 'updateuserpassword']);
     // Route::post('video', [VideoController::class, 'insertvideo']);
 // });
-
-Route::group(['prefix' => 'v1'], function () {
-    //Admin
-    Route::post('admin/login', [AdminController::class, 'loginadmin']);
-    Route::group(['prefix' => 'admin', 'middleware' => 'authorization'], function() {
-        Route::post('user', [AdminController::class, 'adduser']);
-        Route::put('user/{hondaid}', [AdminController::class, 'edituser']);
-        Route::post('user/{hondaid}', [AdminController::class, 'deleteuser']);
-        Route::put('updatepassword/{hondaid}', [PasswordController::class, 'updatepassword']);
-    });
-    //Users
-    Route::group(['prefix' => 'users', 'middleware' => 'authorization'], function() {
-        Route::get('profile', [UserController::class, 'getprofile']);
-        Route::put('profile', [UserController::class, 'edituserprofile']);
-        Route::post('changeavatar', [UserController::class, 'changeAvatar']);
-        Route::put('updateuserpassword', [PasswordController::class, 'updateuserpassword']);
-        Route::post('video', [VideoController::class, 'insertvideo']);
-        Route::get('point', [PointController::class, 'showpoint']);
-    });
-});

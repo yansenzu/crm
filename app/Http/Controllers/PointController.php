@@ -14,6 +14,7 @@ class PointController extends Controller
         return $profile->point;
     }
 
+    //point system for basic class
     public function trainingpoint(Request $request, $point){
         $response = explode(' ', $request->header('Authorization'));
         $profile = User::where('remember_token', $response[1])->first();
@@ -37,4 +38,9 @@ class PointController extends Controller
             'profile' => $nowpoint
         ], 400);
     }
+
+    public function uploadfilepoint(Request $request, $file){
+    //
+    }
+
 }
